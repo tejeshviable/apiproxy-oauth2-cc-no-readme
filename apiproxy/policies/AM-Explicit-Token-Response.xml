@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AM-Explicit-Token-Response">
+  <Set>
+    <Payload contentType="application/json">
+      {"jwt_token": "{oauthv2accesstoken.OAuthV2-GenerateJWT-AT-CC.access_token}"}
+    </Payload>
+  </Set>
+</AssignMessage>

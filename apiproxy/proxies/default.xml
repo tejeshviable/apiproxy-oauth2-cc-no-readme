@@ -21,19 +21,31 @@
       <Step>
         <Name>EV-Developer-Custom-Attributes</Name>
       </Step>
-    </Request>
-    <Response>
       <Step>
-        <Name>AM-Set-CORS-Headers</Name>
+        <Name>RF-Invalid-Grant-Type</Name>
+        <Condition>request.formparam.grant_type != "client_credentials"</Condition>
       </Step>
-    </Response>
+      <Step>
+        <Name>AM-PrivateKey-Variable</Name>
+      </Step>
+      <Step>
+        <Name>JS-SetCustomUserRole</Name>
+      </Step>
+      <Step>
+        <Name>OAuthV2-GenerateJWT-AT-CC</Name>
+      </Step>
+      <Step>
+        <Name>OAuthV2-SetInfo</Name>
+      </Step>
+    </Request>
+    <Response/>
   </PreFlow>
   <PostFlow name="PostFlow">
     <Request/>
     <Response>
-      <!--<Step>-->
-      <!--    <Name>AM-Clean-Response-Headers</Name>-->
-      <!--</Step>-->
+      <Step>
+        <Name>AM-Clean-Response-Headers</Name>
+      </Step>
       <Step>
         <Name>JS-Groom-Token-Response</Name>
         <Condition>request.formparam.grant_type = "client_credentials"</Condition>
@@ -48,87 +60,52 @@
     </Response>
   </PostFlow>
   <Flows>
-    <Flow name="CORS Preflight">
-      <Description>Handle CORS Preflight Requests</Description>
+    <!--<Flow name="opaque token">-->
+    <!--    <Description>dispense opaque tokens for OAuth2.0, for Client credentials</Description>-->
+    <!--    <Request>-->
+    <!--        <Step>-->
+    <!--            <Name>RF-Invalid-Grant-Type</Name>-->
+    <!--            <Condition>request.formparam.grant_type != "client_credentials"</Condition>-->
+    <!--        </Step>-->
+    <!--    </Request>-->
+    <!--    <Response/>-->
+    <!--    <Condition>(proxy.pathsuffix MatchesPath "/token") and (request.verb = "POST")</Condition>-->
+    <!--</Flow>-->
+    <!--<Flow name="JWT token">-->
+    <!--    <Description>dispense JWT for OAuth2.0, for Client credentials</Description>-->
+    <!--    <Request>-->
+    <!--        <Step>-->
+    <!--            <Name>RF-Invalid-Grant-Type</Name>-->
+    <!--            <Condition>request.formparam.grant_type != "client_credentials"</Condition>-->
+    <!--        </Step>-->
+    <!--        <Step>-->
+    <!--            <Name>AM-PrivateKey-Variable</Name>-->
+    <!--        </Step>-->
+    <!--        <Step>-->
+    <!--            <Name>JS-SetCustomUserRole</Name>-->
+    <!--        </Step>-->
+    <!--        <Step>-->
+    <!--            <Name>OAuthV2-GenerateJWT-AT-CC</Name>-->
+    <!--        </Step>-->
+    <!--        <Step>-->
+    <!--            <Name>OAuthV2-SetInfo</Name>-->
+    <!--        </Step>-->
+    <!--    </Request>-->
+    <!--    <Response/>-->
+    <!--    <Condition>(proxy.pathsuffix MatchesPath "/jwt") and (request.verb = "POST")</Condition>-->
+    <!--</Flow>-->
+    <Flow name="Token Verification">
       <Request>
         <Step>
-          <Name>AM-Set-CORS-Headers</Name>
+          <Name>OAuthV2-VerifyAccessToken</Name>
         </Step>
       </Request>
       <Response>
         <Step>
-          <Name>AM-Set-CORS-Headers</Name>
+          <Name>JS-ConditionalBehavior</Name>
         </Step>
       </Response>
-      <Condition>(request.verb = "OPTIONS")</Condition>
-    </Flow>
-    <Flow name="opaque token">
-      <Description>dispense opaque tokens for OAuth2.0, for Client credentials</Description>
-      <!--
-    An example request is like this:
-
-    curl -i -X POST -H 'content-type: application/x-www-form-urlencoded' \
-      -u ${client_id}:${client_secret} \
-      "$endpoint/oauth2-cc/token" \
-      -d 'grant_type=client_credentials'
-
-    The resulting token will have an expiry, and a set of metadata.
-
--->
-      <Request>
-        <Step>
-          <!-- basic validation of the inbound request. Is it well formed? -->
-          <Name>RF-Invalid-Grant-Type</Name>
-          <Condition>request.formparam.grant_type != "client_credentials"</Condition>
-        </Step>
-        <Step>
-          <!-- this policy generates a payload -->
-          <Name>OAuthV2-GenerateAccessToken-CC</Name>
-        </Step>
-      </Request>
-      <Response/>
-      <Condition>(proxy.pathsuffix MatchesPath "/token") and (request.verb = "POST")</Condition>
-    </Flow>
-    <Flow name="JWT token">
-      <Description>dispense JWT for OAuth2.0, for Client credentials</Description>
-      <!--
-    An example request is like this:
-
-    curl -i -X POST -H 'content-type: application/x-www-form-urlencoded' \
-      -u ${client_id}:${client_secret} \
-      "$endpoint/oauth2-cc/jwt" \
-      -d 'grant_type=client_credentials'
-
-    The resulting token will have an expiry, and a set of metadata.
-
--->
-      <Request>
-        <Step>
-          <!-- basic validation of the inbound request. Is it well formed? -->
-          <Name>RF-Invalid-Grant-Type</Name>
-          <Condition>request.formparam.grant_type != "client_credentials"</Condition>
-        </Step>
-        <Step>
-          <Name>AM-PrivateKey-Variable</Name>
-        </Step>
-        <Step>
-          <!-- this policy generates a payload -->
-          <Name>OAuthV2-GenerateJWT-AT-CC</Name>
-        </Step>
-        <Step>
-          <Name>OAuthV2-SetInfo</Name>
-        </Step>
-      </Request>
-      <Response/>
-      <!--<Response>-->
-      <!--    <Step>-->
-      <!--        <Name>OAuthV2-GenerateJWT-AT-CC</Name>-->
-      <!--    </Step>-->
-      <!--    <Step>-->
-      <!--        <Name>OAuthV2-SetInfo</Name>-->
-      <!--    </Step>-->
-      <!--</Response>-->
-      <Condition>(proxy.pathsuffix MatchesPath "/jwt") and (request.verb = "POST")</Condition>
+      <Condition>(proxy.pathsuffix MatchesPath "/ipification") and (request.verb = "POST")</Condition>
     </Flow>
     <Flow name="unknown request">
       <Request>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <OAuthV2 name="OAuthV2-GenerateJWT-AT-CC">
   <Operation>GenerateJWTAccessToken</Operation>
-  <ExpiresIn ref="flow.variable">1800000</ExpiresIn>
+  <ExpiresIn ref="flow.variable">3600000</ExpiresIn>
   <RefreshTokenExpiresIn>691200000</RefreshTokenExpiresIn>
   <SupportedGrantTypes>
     <GrantType>client_credentials</GrantType>
@@ -9,11 +9,19 @@
   <GrantType>request.formparam.grant_type</GrantType>
   <Attributes>
     <Attribute name="grant_type" ref="request.formparam.grant_type" display="true">UNDEFINED</Attribute>
-    <Attribute name="user_role" ref="developer.custom_user_role" display="true">default_role</Attribute>
+    <Attribute name="user_role" ref="developer.custom_user_role1" display="true">default_role**</Attribute>
   </Attributes>
+  <AdditionalClaims>
+    <Claim name="user_role2" display="true" value="Teje">Tejeshvi</Claim>
+  </AdditionalClaims>
+  <CustomClaims>
+    <Claim name="user_role1" display="true" value="Tejes">Tejeshvi Roy</Claim>
+  </CustomClaims>
   <GenerateResponse enabled="true"/>
   <Algorithm>RS256</Algorithm>
   <PrivateKey>
     <Value ref="private.rsa-privatekey-1"/>
   </PrivateKey>
+  <OutputVariable>output_variable</OutputVariable>
+  <Tokens/>
 </OAuthV2>

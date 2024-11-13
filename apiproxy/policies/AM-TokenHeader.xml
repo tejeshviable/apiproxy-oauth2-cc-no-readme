@@ -5,5 +5,5 @@
             <Header name="token">access_token={apigee.access_token}</Header>
         </Headers>
     </Set>
-    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
 </AssignMessage>

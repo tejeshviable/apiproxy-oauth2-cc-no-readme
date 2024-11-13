@@ -44,5 +44,19 @@ if (origResponse.access_token) {
         }
     }
   });
+  context.getVariable("accesstoken.user_role");
+//   var apiKey = context.getVariable("request.header.apikey");
+//   var userRole = context.getVariable("verifyapikey." + apiKey + ".attributes.user_role") || "default_role";
+//   print('API Key: ' + apiKey);
+//   print('User Role: ' + userRole);
+  // Add userRole to newResponse if it exists
+//   if (userRole) {
+//     newResponse.user_role = userRole;
+//   }
+//   var userRole = context.getVariable("request.header.user_role") || "default_role";
+
+  // Setting these claims to be included in the JWT
+  context.setVariable("jwt.claims.user_role", "hihi");
+  context.setVariable("claims.user_role", "hihi2");
   context.setVariable('response.content', JSON.stringify(newResponse, null, 2));
 }

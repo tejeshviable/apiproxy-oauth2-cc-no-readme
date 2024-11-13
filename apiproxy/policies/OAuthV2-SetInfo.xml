@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<SetOAuthV2Info name="OAuthV2-SetInfo">
+<SetOAuthV2Info continueOnError="false" enabled="true" name="OAuthV2-SetInfo" async="false">
+    <DisplayName>OAuthV2-SetInfo</DisplayName>
     <AccessToken ref="apigee.access_token"/>
     <Attributes>
-        <Attribute name="test_attribute">test_value</Attribute>
+        <Attribute name="user_role3">Shera</Attribute>
     </Attributes>
 </SetOAuthV2Info>
