@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SetOAuthV2Info name="OAuthV2-SetInfo">
+    <AccessToken ref="apigee.access_token"/>
+    <Attributes>
+        <Attribute name="test_attribute">test_value</Attribute>
+    </Attributes>
+</SetOAuthV2Info>

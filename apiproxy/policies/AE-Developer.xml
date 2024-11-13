@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AccessEntity name="AE-Developer">
+  <EntityType value="developer"/>
+  <EntityIdentifier ref="request.queryparam.apikey" type="consumerkey"/>
+  <AssignTo>developerInfo</AssignTo>
+  <Properties>
+    <Property name="debug" value="true"/>
+  </Properties>
+</AccessEntity>

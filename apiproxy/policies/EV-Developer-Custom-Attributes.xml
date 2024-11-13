@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables name="EV-Developer-Custom-Attributes">
+  <!--<Source>developerInfo</Source>-->
+  <Source>AccessEntity.AE-Developer</Source>
+  <VariablePrefix>developer</VariablePrefix>
+  <XMLPayload>
+    <Variable name="email" type="string">
+      <XPath>/Developer/Email</XPath>
+    </Variable>
+    <Variable name="custom_user_role" type="string">
+      <XPath>/Developer/Attributes/Attribute[Name="user_role"]/Value/text()</XPath>
+    </Variable>
+  </XMLPayload>
+</ExtractVariables>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage name="AM-Set-CORS-Headers">
+    <Set>
+        <Headers>
+            <Header name="Access-Control-Allow-Origin">http://3.238.201.69:3000</Header>
+            <Header name="Access-Control-Allow-Methods">GET, POST, PUT, DELETE, OPTIONS</Header>
+            <Header name="Access-Control-Allow-Headers">Content-Type, Authorization</Header>
+            <Header name="Access-Control-Allow-Credentials">true</Header>
+        </Headers>
+    </Set>
+    <AssignTo createNew="false" transport="http" type="response"/>
+</AssignMessage>
